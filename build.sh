@@ -42,7 +42,7 @@ cd "$proj_dir/openwrt/package"
 # luci-app-helloworld
 git clone https://github.com/xiaorouji/openwrt-passwall.git custom/openwrt-passwall
 # luci-app-openclash
-svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash custom/luci-app-openclash
+# svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash custom/luci-app-openclash
 # luci-app-filebrowser
 svn co https://github.com/immortalwrt/luci/branches/openwrt-21.02/applications/luci-app-filebrowser custom/luci-app-filebrowser
 svn co https://github.com/immortalwrt/packages/branches/openwrt-21.02/utils/filebrowser custom/filebrowser
@@ -66,12 +66,12 @@ git clone -b master --depth 1 https://github.com/jerrykuku/luci-theme-argon.git 
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-zerotier custom/luci-app-zerotier
 svn co https://github.com/coolsnowwolf/packages/trunk/net/zerotier custom/zerotier
 #vlmcsd, ttyd, adguardhome
-svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/vlmcsd  custom/vlmcsd
-svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-vlmcsd custom/luci-app-vlmcsd
-svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-ttyd custom/luci-app-ttyd
+#svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/vlmcsd  custom/vlmcsd
+#svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-vlmcsd custom/luci-app-vlmcsd
+#svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-ttyd custom/luci-app-ttyd
 git clone https://github.com/rufengsuixing/luci-app-adguardhome.git custom/luci-app-adguardhome
-svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/adbyby custom/adbyby
-svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-adbyby-plus custom/luci-app-adbyby-plus
+#svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/adbyby custom/adbyby
+#svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-adbyby-plus custom/luci-app-adbyby-plus
 
 # usb wifi drivers:
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/r8125 custom/r8125
