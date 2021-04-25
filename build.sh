@@ -36,6 +36,7 @@ for feed in $feed_list; do
     }
 done
 
+
 # addition packages
 cd "$proj_dir/openwrt/package"
 # luci-app-helloworld
@@ -101,6 +102,7 @@ cd "$proj_dir/openwrt"
 # customize configs
 cd "$proj_dir/openwrt"
 cat "$proj_dir/config.seed" >.config
+cat "$proj_dir/my-full-config" >.config
 make defconfig
 
 # build openwrt
