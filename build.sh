@@ -91,6 +91,10 @@ find . -name .git -exec rm -rf {} +
 cd "$proj_dir/openwrt/package"
 "$proj_dir/scripts/convert_translation.sh"
 
+# add information:
+cd "$proj_dir/openwrt/"
+echo -e "\nBuild date:$(date +%Y-%m-%d), by dongyusen@gmail.com\n" >> package/base-files/files/etc/banner
+
 # create acl files
 cd "$proj_dir/openwrt"
 "$proj_dir/scripts/create_acl_for_luci.sh" -a
