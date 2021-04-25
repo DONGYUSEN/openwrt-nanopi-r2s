@@ -73,6 +73,11 @@ git clone -b master --depth 1 https://github.com/jerrykuku/luci-theme-argon.git 
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-zerotier custom/luci-app-zerotier
 svn co https://github.com/coolsnowwolf/packages/trunk/net/zerotier custom/zerotier
 
+# add information:
+cd "$proj_dir/openwrt/"
+echo -e "\nBuild date:$(date +%Y-%m-%d), by dongyusen@gmail.com\n" >> package/base-files/files/etc/banner
+
+
 # clean up packages
 cd "$proj_dir/openwrt/package"
 find . -name .svn -exec rm -rf {} +
