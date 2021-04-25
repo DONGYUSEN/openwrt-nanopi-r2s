@@ -78,6 +78,12 @@ svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/r8125 custom/r812
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/r8152 custom/r8152
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/r8168 custom/r8168
 
+svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/kernel/rtl8812au-ac custom/rtl8812au-ac 
+svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/kernel/rtl8821cu custom/rtl8821cu
+svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/kernel/rtl8188eu custom/rtl8188eu
+svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/kernel/rtl8192du custom/rtl8192du
+svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/kernel/rtl88x2bu custom/rtl88x2bu
+
 # add information:
 cd "$proj_dir/openwrt/"
 echo -e "\nBuild date:$(date +%Y-%m-%d), by dongyusen@gmail.com\n" >> package/base-files/files/etc/banner
@@ -108,7 +114,7 @@ make defconfig
 # build openwrt
 cd "$proj_dir/openwrt"
 make download -j8
-make -i -j$(($(nproc) + 1)) || make -j1 V=s
+make -j$(($(nproc) + 1)) || make -j1 V=s
 
 # copy output files
 cd "$proj_dir"
