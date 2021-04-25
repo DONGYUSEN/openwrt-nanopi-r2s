@@ -108,7 +108,7 @@ make defconfig
 # build openwrt
 cd "$proj_dir/openwrt"
 make download -j8
-make -j$(($(nproc) + 1)) || make -j1 V=s
+make -i -j$(($(nproc) + 1)) || make -j1 V=s
 
 # copy output files
 cd "$proj_dir"
