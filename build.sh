@@ -69,6 +69,13 @@ svn co https://github.com/coolsnowwolf/packages/package/trunk/lean/vlmcsd  custo
 svn co https://github.com/coolsnowwolf/packages/package/trunk/lean/luci-app-vlmcsd custom/luci-app-vlmcsd
 svn co https://github.com/coolsnowwolf/packages/package/trunk/lean/luci-app-ttyd custom/luci-app-ttyd
 git clone https://github.com/rufengsuixing/luci-app-adguardhome.git custom/luci-app-adguardhome
+svn co https://github.com/coolsnowwolf/packages/package/trunk/lean/adbyby custom/adbyby
+svn co https://github.com/coolsnowwolf/packages/package/trunk/lean/luci-app-adbyby-plus custom/luci-app-adbyby-plus
+
+# usb wifi drivers:
+svn co https://github.com/coolsnowwolf/packages/package/trunk/lean/r8125 custom/r8125
+svn co https://github.com/coolsnowwolf/packages/package/trunk/lean/r8152 custom/r8152
+svn co https://github.com/coolsnowwolf/packages/package/trunk/lean/r8168 custom/r8168
 
 # add information:
 cd "$proj_dir/openwrt/"
