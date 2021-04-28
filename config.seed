@@ -74,6 +74,6 @@ CONFIG_PACKAGE_luci-app-zerotier=y
 CONFIG_PACKAGE_luci-app-vlmcsd=y
 CONFIG_PACKAGE_luci-app-adguardhome=y
 CONFIG_PACKAGE_luci-app-adbyby-plus=y
-CONFIG_PACKAGE_luci-app-dockerman=y
+# CONFIG_PACKAGE_luci-app-dockerman=y
 CONFIG_PACKAGE_luci-app-xlnetacc=y
 CONFIG_PACKAGE_luci-app-vsftpd=y
