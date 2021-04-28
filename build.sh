@@ -112,7 +112,7 @@ cd "$proj_dir/openwrt"
 # customize configs
 cd "$proj_dir/openwrt"
 cat "$proj_dir/config.seed" >.config
-cat "$proj_dir/my-full-config" >.config
+# cat "$proj_dir/my-full-config" >.config
 make defconfig
 
 # build openwrt
