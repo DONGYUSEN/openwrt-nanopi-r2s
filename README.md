@@ -10,5 +10,6 @@
 - username: root
 - password: fa
 
+fork from:
 
-[Fanck0605] https://github.com/fanck0605/openwrt-nanopi-r2s
+[Fanck0605](https://github.com/fanck0605/openwrt-nanopi-r2s)
