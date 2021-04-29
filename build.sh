@@ -42,7 +42,7 @@ cd "$proj_dir/openwrt/package"
 # luci-app-helloworld
 git clone https://github.com/xiaorouji/openwrt-passwall.git custom/openwrt-passwall
 # luci-app-openclash
-# svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash custom/luci-app-openclash
+svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash custom/luci-app-openclash
 # luci-app-filebrowser
 svn co https://github.com/immortalwrt/luci/branches/openwrt-21.02/applications/luci-app-filebrowser custom/luci-app-filebrowser
 svn co https://github.com/immortalwrt/packages/branches/openwrt-21.02/utils/filebrowser custom/filebrowser
