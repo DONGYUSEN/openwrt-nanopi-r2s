@@ -72,7 +72,7 @@ svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-vlmcsd c
 git clone https://github.com/rufengsuixing/luci-app-adguardhome.git custom/luci-app-adguardhome
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/adbyby custom/adbyby
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-adbyby-plus custom/luci-app-adbyby-plus
-svn co https://github.com/lisaac/luci-app-dockerman/trunk/applications/luci-app-dockerman custom/luci-app-dockerman
+#svn co https://github.com/lisaac/luci-app-dockerman/trunk/applications/luci-app-dockerman custom/luci-app-dockerman
 
 
 # usb wifi drivers:
