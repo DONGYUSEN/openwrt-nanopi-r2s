@@ -87,9 +87,9 @@ svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package
 svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/kernel/rtl88x2bu custom/rtl88x2bu
 
 # 花生壳内网穿透
-svn co https://github.com/teasiu/dragino2/trunk/devices/common/diy/package/teasiu/luci-app-phtunnel custom/luci-app-phtunnel
-svn co https://github.com/teasiu/dragino2/trunk/devices/common/diy/package/teasiu/phtunnel custom/phtunnel
-svn co https://github.com/QiuSimons/dragino2-teasiu/trunk/package/teasiu/luci-app-oray custom/luci-app-oray
+#svn co https://github.com/teasiu/dragino2/trunk/devices/common/diy/package/teasiu/luci-app-phtunnel custom/luci-app-phtunnel
+#svn co https://github.com/teasiu/dragino2/trunk/devices/common/diy/package/teasiu/phtunnel custom/phtunnel
+#svn co https://github.com/QiuSimons/dragino2-teasiu/trunk/package/teasiu/luci-app-oray custom/luci-app-oray
 
 # add information:
 cd "$proj_dir/openwrt/"
