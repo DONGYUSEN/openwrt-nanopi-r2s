@@ -49,7 +49,7 @@ svn co https://github.com/immortalwrt/packages/branches/openwrt-21.02/utils/file
 # luci-app-arpbind
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-arpbind custom/luci-app-arpbind
 # luci-app-xlnetacc
-svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/lean/luci-app-xlnetacc custom/luci-app-xlnetacc
+# svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/lean/luci-app-xlnetacc custom/luci-app-xlnetacc
 # luci-app-autoreboot
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-autoreboot custom/luci-app-autoreboot
 # luci-app-vsftpd
@@ -72,8 +72,13 @@ svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-vlmcsd c
 git clone https://github.com/rufengsuixing/luci-app-adguardhome.git custom/luci-app-adguardhome
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/adbyby custom/adbyby
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-adbyby-plus custom/luci-app-adbyby-plus
-#svn co https://github.com/lisaac/luci-app-dockerman/trunk/applications/luci-app-dockerman custom/luci-app-dockerman
 
+# fix docker build with golang 
+svn co https://github.com/lisaac/luci-app-dockerman/trunk/applications/luci-app-dockerman custom/luci-app-dockerman
+rm -rf feeds/packages/utils/containerd && svn export https://github.com/coolsnowwolf/packages/trunk/utils/containerd feeds/packages/utils/containerd
+rm -rf feeds/packages/utils/docker-ce && svn export https://github.com/coolsnowwolf/packages/trunk/utils/docker-ce feeds/packages/utils/docker-ce
+rm -rf feeds/packages/utils/libnetwork && svn export https://github.com/coolsnowwolf/packages/trunk/utils/libnetwork feeds/packages/utils/libnetwork
+rm -rf feeds/packages/utils/runc && svn export https://github.com/coolsnowwolf/packages/trunk/utils/runc feeds/packages/utils/runc
 
 # usb wifi drivers:
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/r8125 custom/r8125
