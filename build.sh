@@ -36,7 +36,6 @@ for feed in $feed_list; do
     }
 done
 
-
 # addition packages
 cd "$proj_dir/openwrt/package"
 # luci-app-helloworld
@@ -75,6 +74,8 @@ svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-adbyby-p
 
 # fix docker build with golang 
 svn co https://github.com/lisaac/luci-app-dockerman/trunk/applications/luci-app-dockerman custom/luci-app-dockerman
+rm -rf feeds/packages/lang/luasec && svn co https://github.com/coolsnowwolf/packages/trunk/lang/luasec feeds/packages/lang/luasec
+rm -rf feeds/packages/lang/golang/ && svn co https://github.com/coolsnowwolf/packages/trunk/lang/golang feeds/packages/lang/golang
 rm -rf feeds/packages/utils/containerd && svn export https://github.com/coolsnowwolf/packages/trunk/utils/containerd feeds/packages/utils/containerd
 rm -rf feeds/packages/utils/docker-ce && svn export https://github.com/coolsnowwolf/packages/trunk/utils/docker-ce feeds/packages/utils/docker-ce
 rm -rf feeds/packages/utils/libnetwork && svn export https://github.com/coolsnowwolf/packages/trunk/utils/libnetwork feeds/packages/utils/libnetwork
