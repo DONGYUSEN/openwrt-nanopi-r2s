@@ -1,0 +1,168 @@
+name: openwrt-21.02
+
+on:
+  push:
+    branches:
+      - openwrt-21.02
+  schedule:
+    - cron: '00 18 * * *'
+  watch:
+    types: [started]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-20.04
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+
+      - name: Checkout Project
+        uses: actions/checkout@v2
+        with:
+          ref: openwrt-21.02
+
+      - name: Initialize Environment
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          sudo du -xh --exclude=/{proc,sys,dev} / | grep -E '^[0-9.]*?[GTPEZY]'
+          docker image prune -a -f
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
+          sudo -E apt update
+          sudo -E apt install build-essential ccache ecj fastjar file g++ gawk gettext git java-propose-classpath libelf-dev libncurses5-dev libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget python3-distutils python3-setuptools rsync subversion swig time xsltproc zlib1g-dev
+          sudo -E apt autoremove --purge
+          sudo -E apt clean
+          git config --global user.name "GitHub"
+          git config --global user.email "noreply@github.com"
+          df -h
+
+      - name: Clone Openwrt 21.02
+        run: |
+          rm -rf openwrt
+          git clone -b openwrt-21.02 https://github.com/openwrt/openwrt.git openwrt
+          cd openwrt
+          chmod +x ./target/linux/rockchip/armv8/base-files/etc/board.d/01_leds
+          chmod +x ./target/linux/rockchip/armv8/base-files/etc/board.d/02_network
+
+      - name: Patch OpenWrt
+        run: |
+          cd openwrt
+          cat patches/*.patch | patch -p1
+          wget -qO- https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/3940.patch | patch -p1
+
+      - name: Clone Feeds
+        run: |
+          cd openwrt
+          ./scripts/feeds update -a
+
+      - name: Addition Packages
+        run: |
+          cd openwrt/package
+          # luci-app-helloworld
+          git clone https://github.com/xiaorouji/openwrt-passwall.git custom/openwrt-passwall
+          # luci-app-openclash
+          svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash custom/luci-app-openclash
+          # luci-app-filebrowser
+          svn co https://github.com/immortalwrt/luci/branches/openwrt-21.02/applications/luci-app-filebrowser custom/luci-app-filebrowser
+          svn co https://github.com/immortalwrt/packages/branches/openwrt-21.02/utils/filebrowser custom/filebrowser
+          # luci-app-arpbind
+          svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-arpbind custom/luci-app-arpbind
+          # luci-app-xlnetacc
+          # svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/lean/luci-app-xlnetacc custom/luci-app-xlnetacc
+          # luci-app-autoreboot
+          svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-autoreboot custom/luci-app-autoreboot
+          # luci-app-vsftpd
+          svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/lean/luci-app-vsftpd custom/luci-app-vsftpd
+          svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/lean/vsftpd-alt custom/vsftpd-alt
+          # luci-app-netdata
+          svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-netdata custom/luci-app-netdata
+          # ddns-scripts
+          svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/lean/ddns-scripts_aliyun custom/ddns-scripts_aliyun
+          svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/lean/ddns-scripts_dnspod custom/ddns-scripts_dnspod
+          # luci-theme-argon
+          git clone -b master --depth 1 https://github.com/jerrykuku/luci-theme-argon.git custom/luci-theme-argon
+          # zerotier
+          svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-zerotier custom/luci-app-zerotier
+          svn co https://github.com/coolsnowwolf/packages/trunk/net/zerotier custom/zerotier
+          #vlmcsd, ttyd, adguardhome
+          svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/vlmcsd  custom/vlmcsd
+          svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-vlmcsd custom/luci-app-vlmcsd
+          #svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-ttyd custom/luci-app-ttyd
+          git clone https://github.com/rufengsuixing/luci-app-adguardhome.git custom/luci-app-adguardhome
+          svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/adbyby custom/adbyby
+          svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-adbyby-plus custom/luci-app-adbyby-plus
+
+          # fix docker build with golang 
+          svn co https://github.com/lisaac/luci-app-dockerman/trunk/applications/luci-app-dockerman custom/luci-app-dockerman
+          rm -rf feeds/packages/lang/luasec && svn co https://github.com/coolsnowwolf/packages/trunk/lang/luasec feeds/packages/lang/luasec
+          rm -rf feeds/packages/lang/golang/ && svn co https://github.com/coolsnowwolf/packages/trunk/lang/golang feeds/packages/lang/golang
+          rm -rf feeds/packages/utils/containerd && svn export https://github.com/coolsnowwolf/packages/trunk/utils/containerd feeds/packages/utils/containerd
+          rm -rf feeds/packages/utils/docker-ce && svn export https://github.com/coolsnowwolf/packages/trunk/utils/docker-ce feeds/packages/utils/docker-ce
+          rm -rf feeds/packages/utils/libnetwork && svn export https://github.com/coolsnowwolf/packages/trunk/utils/libnetwork feeds/packages/utils/libnetwork
+          rm -rf feeds/packages/utils/runc && svn export https://github.com/coolsnowwolf/packages/trunk/utils/runc feeds/packages/utils/runc
+
+          # usb wifi drivers:
+          svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/r8125 custom/r8125
+          svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/r8152 custom/r8152
+          svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/r8168 custom/r8168
+
+          svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/kernel/rtl8812au-ac custom/rtl8812au-ac 
+          svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/kernel/rtl8821cu custom/rtl8821cu
+          svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/kernel/rtl8188eu custom/rtl8188eu
+          svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/kernel/rtl8192du custom/rtl8192du
+          svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/kernel/rtl88x2bu custom/rtl88x2bu
+
+          # 花生壳内网穿透
+          #svn co https://github.com/teasiu/dragino2/trunk/devices/common/diy/package/teasiu/luci-app-phtunnel custom/luci-app-phtunnel
+          #svn co https://github.com/teasiu/dragino2/trunk/devices/common/diy/package/teasiu/phtunnel custom/phtunnel
+          #svn co https://github.com/QiuSimons/dragino2-teasiu/trunk/package/teasiu/luci-app-oray custom/luci-app-oray
+
+      - name: Add information
+        run: |
+          cd openwrt
+          echo -e "\nBuild date:$(date +%Y-%m-%d), openwrt21.02 for R2S, by dongyusen@gmail.com\n" >> package/base-files/files/etc/banner
+
+      - name: Clean Packages && others
+        run: |
+          cd openwrt/package
+          find . -name .svn -exec rm -rf {} +
+          find . -name .git -exec rm -rf {} +
+
+          #zh_cn to zh_Hans
+          ./scripts/convert_translation.sh
+          #create acl files
+          ./scripts/create_acl_for_luci.sh
+
+      - name: Install packages
+        run: |
+          cd openwrt
+          ./scripts/feeds install -a
+
+      - name: Customize configs
+        run: |
+          cd openwrt
+          cat config.seed >.config
+          make defconfig
+
+      - name: Build OpenWrt
+        run: |
+          make download -j8
+          make -j$(($(nproc) + 1)) || make -j1 V=s
+          df -h
+
+      - name: Copy output files
+        run: |
+          cp -a openwrt/bin/targets/*/* artifact
+          ls -l artifact/
+
+      - name: Assemble Artifact
+        id: assemble_artifact
+        run: |
+          echo "##[set-output name=artifact_name;]OpenWrt_$(date +%Y%m%d)_NanoPi-R2S"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ steps.assemble_artifact.outputs.artifact_name }}
+          path: artifact
