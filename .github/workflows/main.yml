@@ -149,6 +149,7 @@ jobs:
 
       - name: Build OpenWrt
         run: |
+          cd openwrt
           make download -j8
           make -j$(($(nproc) + 1)) || make -j1 V=s
           df -h
