@@ -13,6 +13,9 @@ proj_dir=$(pwd)
 cd "$proj_dir"
 rm -rf openwrt
 git clone -b openwrt-21.02 https://github.com/openwrt/openwrt.git openwrt
+cd openwrt
+chmod +x ./target/linux/rockchip/armv8/base-files/etc/board.d/01_leds
+chmod +x ./target/linux/rockchip/armv8/base-files/etc/board.d/02_network
 
 # patch openwrt
 cd "$proj_dir/openwrt"
