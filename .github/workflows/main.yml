@@ -134,7 +134,7 @@ jobs:
           #zh_cn to zh_Hans
           ./scripts/convert_translation.sh
           #create acl files
-          ./scripts/create_acl_for_luci.sh
+          #./scripts/create_acl_for_luci.sh
 
       - name: Install packages
         run: |
