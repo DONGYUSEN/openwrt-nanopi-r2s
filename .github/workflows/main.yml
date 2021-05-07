@@ -49,7 +49,7 @@ jobs:
       - name: Patch OpenWrt
         run: |
           cd openwrt
-          cat patches/*.patch | patch -p1
+          cat ../patches/*.patch | patch -p1
           wget -qO- https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/3940.patch | patch -p1
 
       - name: Clone Feeds
@@ -89,7 +89,7 @@ jobs:
           #vlmcsd, ttyd, adguardhome
           svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/vlmcsd  custom/vlmcsd
           svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-vlmcsd custom/luci-app-vlmcsd
-          #svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-ttyd custom/luci-app-ttyd
+          svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-ttyd custom/luci-app-ttyd
           git clone https://github.com/rufengsuixing/luci-app-adguardhome.git custom/luci-app-adguardhome
           svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/adbyby custom/adbyby
           svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-adbyby-plus custom/luci-app-adbyby-plus
@@ -130,7 +130,7 @@ jobs:
           find . -name .svn -exec rm -rf {} +
           find . -name .git -exec rm -rf {} +
           
-          cd ../
+          cd ../../
           #zh_cn to zh_Hans
           ./scripts/convert_translation.sh
           #create acl files
@@ -144,7 +144,7 @@ jobs:
       - name: Customize configs
         run: |
           cd openwrt
-          cat ../config.seed >.config
+          cat ../config.seed > .config
           make defconfig
 
       - name: Build OpenWrt
