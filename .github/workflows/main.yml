@@ -129,7 +129,8 @@ jobs:
           cd openwrt/package
           find . -name .svn -exec rm -rf {} +
           find . -name .git -exec rm -rf {} +
-
+          
+          cd ../
           #zh_cn to zh_Hans
           ./scripts/convert_translation.sh
           #create acl files
@@ -143,7 +144,7 @@ jobs:
       - name: Customize configs
         run: |
           cd openwrt
-          cat config.seed >.config
+          cat ../config.seed >.config
           make defconfig
 
       - name: Build OpenWrt
