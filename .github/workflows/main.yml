@@ -5,7 +5,7 @@ on:
     branches:
       - openwrt-21.02
   schedule:
-    - cron: '00 16 * * *'
+    - cron: '00 16 * * 1,6'
   watch:
     types: [started]
 
@@ -65,8 +65,8 @@ jobs:
           # luci-app-openclash
           svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash custom/luci-app-openclash
           # luci-app-filebrowser
-          svn co https://github.com/immortalwrt/luci/branches/openwrt-21.02/applications/luci-app-filebrowser custom/luci-app-filebrowser
-          svn co https://github.com/immortalwrt/packages/branches/openwrt-21.02/utils/filebrowser custom/filebrowser
+          # svn co https://github.com/immortalwrt/luci/branches/openwrt-21.02/applications/luci-app-filebrowser custom/luci-app-filebrowser
+          # svn co https://github.com/immortalwrt/packages/branches/openwrt-21.02/utils/filebrowser custom/filebrowser
           # luci-app-arpbind
           svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-arpbind custom/luci-app-arpbind
           # luci-app-xlnetacc
@@ -104,9 +104,9 @@ jobs:
           rm -rf feeds/packages/utils/runc && svn export https://github.com/coolsnowwolf/packages/trunk/utils/runc feeds/packages/utils/runc
 
           # usb wifi drivers:
-          svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/r8125 custom/r8125
-          svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/r8152 custom/r8152
-          svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/r8168 custom/r8168
+          # svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/r8125 custom/r8125
+          # svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/r8152 custom/r8152
+          # svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/r8168 custom/r8168
 
           svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/kernel/rtl8812au-ac custom/rtl8812au-ac 
           svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/kernel/rtl8821cu custom/rtl8821cu
