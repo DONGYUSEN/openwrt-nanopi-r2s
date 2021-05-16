@@ -74,8 +74,6 @@ jobs:
           # luci-app-autoreboot
           svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-autoreboot custom/luci-app-autoreboot
           # luci-app-vsftpd
-          luci/applications/luci-app-vsftpd/
-
           svn co https://github.com/immortalwrt/luci/branches/openwrt-21.02/applications/luci-app-vsftpd custom/luci-app-vsftpd
           svn co https://github.com/immortalwrt/packages/branches/openwrt-21.02/net/vsftpd-alt custom/vsftpd-alt
           # luci-app-netdata
