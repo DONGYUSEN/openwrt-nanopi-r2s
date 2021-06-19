@@ -61,7 +61,7 @@ jobs:
         run: |
           cd openwrt/package
           # luci-app-helloworld
-          #git clone https://github.com/xiaorouji/openwrt-passwall.git custom/openwrt-passwall
+          git clone https://github.com/xiaorouji/openwrt-passwall.git custom/openwrt-passwall
           
           git clone --depth=1 https://github.com/garypang13/luci-app-bypass custom/luci-app-bypass
           git clone --depth=1 https://github.com/garypang13/smartdns-le custom/smartdns-le
