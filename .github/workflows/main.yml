@@ -140,7 +140,7 @@ jobs:
           
       - name: Install Clash Binaries
         run: |
-          cd code/friendlywrt/package/base-files/files
+          cd openwrt/package/base-files/files
           mkdir -p etc/openclash/core
           # for updates, go to: https://github.com/Dreamacro/clash/releases
           wget -qO- https://github.com/Dreamacro/clash/releases/download/v1.6.0/clash-linux-armv8-v1.6.0.gz | gunzip -c > etc/openclash/core/clash
