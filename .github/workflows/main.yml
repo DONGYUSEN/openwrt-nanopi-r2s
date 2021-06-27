@@ -64,9 +64,10 @@ jobs:
           git clone https://github.com/xiaorouji/openwrt-passwall.git custom/openwrt-passwall
           svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/redsocks2 custom/redsocks2
           git clone https://github.com/jerrykuku/lua-maxminddb.git custom/lua-maxminddb
-
-          git clone --depth=1 https://github.com/garypang13/luci-app-bypass custom/luci-app-bypass
-          git clone --depth=1 https://github.com/garypang13/smartdns-le custom/smartdns-le
+          git clone https://github.com/jerrykuku/luci-app-vssr.git custom/luci-app-vssr
+          
+          #git clone --depth=1 https://github.com/garypang13/luci-app-bypass custom/luci-app-bypass
+          #git clone --depth=1 https://github.com/garypang13/smartdns-le custom/smartdns-le
           
           # luci-app-openclash
           svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash custom/luci-app-openclash
@@ -136,7 +137,19 @@ jobs:
           #svn co https://github.com/teasiu/dragino2/trunk/devices/common/diy/package/teasiu/luci-app-phtunnel custom/luci-app-phtunnel
           #svn co https://github.com/teasiu/dragino2/trunk/devices/common/diy/package/teasiu/phtunnel custom/phtunnel
           #svn co https://github.com/QiuSimons/dragino2-teasiu/trunk/package/teasiu/luci-app-oray custom/luci-app-oray
-
+          
+      - name: Install Clash Binaries
+        run: |
+          cd code/friendlywrt/package/base-files/files
+          mkdir -p etc/openclash/core
+          # for updates, go to: https://github.com/Dreamacro/clash/releases
+          wget -qO- https://github.com/Dreamacro/clash/releases/download/v1.6.0/clash-linux-armv8-v1.6.0.gz | gunzip -c > etc/openclash/core/clash
+          # for updates, go to: https://github.com/vernesong/OpenClash/releases/tag/TUN-Premium
+          wget -qO- https://github.com/vernesong/OpenClash/releases/download/TUN-Premium/clash-linux-armv8-2021.05.08.gz | gunzip -c > etc/openclash/core/clash_tun
+          # for updates, go to: https://github.com/vernesong/OpenClash/releases/tag/TUN
+          wget -qO- https://github.com/vernesong/OpenClash/releases/download/TUN/clash-linux-armv8.tar.gz | tar xOvz > etc/openclash/core/clash_game
+          chmod +x etc/openclash/core/clash*
+          
       - name: Add information
         run: |
           cd openwrt
